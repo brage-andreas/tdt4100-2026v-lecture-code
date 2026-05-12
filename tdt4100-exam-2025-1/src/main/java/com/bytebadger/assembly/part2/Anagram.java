@@ -1,6 +1,6 @@
 package com.bytebadger.assembly.part2;
 
-// TODO: Import relevant libraries
+import java.util.Map;
 
 public class Anagram {
 
@@ -23,10 +23,25 @@ public class Anagram {
      */
     public boolean isAnagram(String str1, String str2) {
 
-        // TODO: Complete the method according to JavaDoc
+        if (str1 == null || str2 == null) {
+            return false;
+        }
 
-        return true; // Placeholder return statement, replace with actual logic
+        if (str1.isEmpty() || str2.isEmpty()) {
+            return false;
+        }
+
+        if (str1.length() == 0 || str2.length() == 0) {
+            return false;
+        }
+
+        String cleanedStr1 = str1.replaceAll(" ", "").toLowerCase();
+        String cleanedStr2 = str2.replaceAll(" ", "").toLowerCase();
+
+        Map<Character, Integer> a = CharacterFrequency.countCharacterFrequency(cleanedStr1);
+        Map<Character, Integer> b = CharacterFrequency.countCharacterFrequency(cleanedStr2);
+
+        return a.equals(b);
 
     }
 }
-

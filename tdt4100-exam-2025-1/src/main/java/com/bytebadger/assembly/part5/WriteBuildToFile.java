@@ -1,5 +1,8 @@
 package com.bytebadger.assembly.part5;
 
+import java.io.IOException;
+import java.io.OutputStream;
+
 import no.ntnu.tdt4100.bytebadger.*;
 
 // TODO: Import relevant libraries
@@ -48,8 +51,38 @@ public class WriteBuildToFile {
 
     public static void write(ICustomBuild build, OutputStream outputStream) throws IOException {
 
-        // TODO: Complete the method according to JavaDoc
+        String dataToWrite = WriteBuildToFile.buildToString(build);
 
+        outputStream.write(dataToWrite.getBytes());
+        outputStream.flush();
+
+    }
+
+    public static String buildToString(ICustomBuild build) {
+        double totalPrice = 0;
+
+        Customer customer = build.getCustomer();
+
+        String result = customer.name() + ";" + customer.email() + "\n";
+        result += "\n";
+
+        for (var entry : build.getParts().entrySet()) {
+            Integer quantity = entry.getValue();
+            IComputerPart part = entry.getKey();
+
+            String productName = part.getProductName();
+            String manufacturer = part.getManufacturer();
+            double unitPrice = part.getPrice();
+
+            totalPrice += unitPrice * quantity;
+
+            result += quantity + ";" + productName + ";" + manufacturer + ";" + unitPrice;
+        }
+
+        result += "\n";
+        result += totalPrice;
+
+        return result;
     }
 
 }

@@ -20,9 +20,36 @@ public class LargestElementFinder {
 
     public int findLargest(List<Integer> numbers) {
 
-        // TODO: Complete the method according to JavaDoc
-        
-        return 0;
+        if (numbers == null || numbers.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        // Metode A
+        // --------
+        // Integer max = numbers.getFirst();
+        //
+        // for (Integer number : numbers){
+        //     if (number > max) {
+        //         max = number;
+        //     }
+        // }
+        //
+        // return max;
+
+        // Metode B
+        // --------
+        // numbers.sort(Integer::compareTo);
+        // // ELLER
+        // // numbers.sort((a, b) -> a - b);
+        //
+        // return numbers.getLast();
+
+        // Metode C
+        // --------
+        return numbers.stream().max(Integer::compareTo).get();
+        // ELLER
+        // return numbers.stream().max((a, b) -> a - b).get();
+
     }
 
 }

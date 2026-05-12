@@ -1,9 +1,7 @@
 package com.bytebadger.assembly.part2;
 
+import java.util.HashMap;
 import java.util.Map;
-
-// TODO: Import relevant libraries
-
 
 public class CharacterFrequency {
 
@@ -15,9 +13,19 @@ public class CharacterFrequency {
 
     public static Map<Character, Integer> countCharacterFrequency(String input) {
 
-        // TODO: Complete the method according to JavaDoc
+        Map<Character, Integer> result = new HashMap<>();
 
-        return null;
+        if (input == null) {
+            return result;
+        }
+
+        for (Character character : input.toCharArray()) {
+            int currentCount = result.getOrDefault(character, 0);
+
+            result.put(character, currentCount + 1);
+        }
+
+        return result;
 
     }
 }
